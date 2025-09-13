@@ -69,7 +69,7 @@ pipeline {
                     sh """
                       echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
                       docker build -t bms:latest .
-                      docker tag bms:v1 $DOCKER_USER/bms:latest
+                      docker tag bms:latest $DOCKER_USER/bms:latest
                       docker push $DOCKER_USER/bms:latest
                     """
                 }
