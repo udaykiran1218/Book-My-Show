@@ -10,10 +10,10 @@ COPY package.json package-lock.json ./
 # Force install a compatible PostCSS version to fix the issue
 RUN npm install postcss@8.4.21 postcss-safe-parser@6.0.0 --legacy-peer-deps
 
-# Install dependencies
+# Install dependencies required for project
 RUN npm install
 
-# Copy the entire project
+# Copy the entire project to app directory
 COPY . .
 
 # Expose port 3000
