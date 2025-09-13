@@ -10,7 +10,7 @@ pipeline {
         SCANNER_HOME = tool 'sonar-scanner'
         DOCKER_IMAGE = 'udaykiran1218/bms:latest'
         EKS_CLUSTER_NAME = 'my-demo-eks'
-        AWS_REGION = 'ap-norteast-3'
+        AWS_REGION = 'ap-northeast-3'
     }
 
     stages {
@@ -70,7 +70,7 @@ pipeline {
                       echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
                       docker build -t bms:latest .
                       docker tag bms:v1 $DOCKER_USER/bms:latest
-                      docker push $DOCKER_USER/apache-website:latest
+                      docker push $DOCKER_USER/bms:latest
                     """
                 }
             }
