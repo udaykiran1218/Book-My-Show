@@ -9,8 +9,8 @@ pipeline {
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
         DOCKER_IMAGE = 'udaykiran1218/bms:latest'
-        EKS_CLUSTER_NAME = 'akshat-eks'
-        AWS_REGION = 'us-east-1'
+        EKS_CLUSTER_NAME = 'my-demo-eks'
+        AWS_REGION = 'ap-norteast-3'
     }
 
     stages {
@@ -68,9 +68,9 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh """
                       echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                      docker build -t apache-website:v1 .
-                      docker tag apache-website:v1 $DOCKER_USER/apache-website:v1
-                      docker push $DOCKER_USER/apache-website:v1
+                      docker build -t bms:latest .
+                      docker tag bms:v1 $DOCKER_USER/bms:latest
+                      docker push $DOCKER_USER/apache-website:latest
                     """
                 }
             }
@@ -109,7 +109,7 @@ pipeline {
                 body: "Project: ${env.JOB_NAME}<br/>" +
                       "Build Number: ${env.BUILD_NUMBER}<br/>" +
                       "URL: ${env.BUILD_URL}<br/>",
-                to: 'kastrokiran@gmail.com'
+                to: 'udaykiran1218@gmail.com'
         }
     }
 }
